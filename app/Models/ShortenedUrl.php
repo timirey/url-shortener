@@ -35,7 +35,7 @@ class ShortenedUrl extends Model
     /**
      * Get all redirects regarding this shortened url object
      */
-    public function getRedirects()
+    public function redirects()
     {
         return $this->hasMany(ShortenedUrlRedirect::class);
     }

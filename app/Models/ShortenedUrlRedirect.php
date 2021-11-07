@@ -23,7 +23,7 @@ class ShortenedUrlRedirect extends Model
     /**
      * Get the shortened url it belongs to.
      */
-    public function getUrl()
+    public function url()
     {
         return $this->belongsTo(ShortenedUrl::class);
     }
