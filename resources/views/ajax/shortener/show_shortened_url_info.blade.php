@@ -3,7 +3,7 @@
     <strong>
         {{ $shortenedUrl->getShortenedUrl() }}
     </strong>
-    <table class="table table-sm mt-4">
+    <table class="table table-sm mt-4 table-responsive">
         <tr>
             <td>{{ __('Original URL') }}</td>
             <td>{{ $shortenedUrl->url }}</td>
