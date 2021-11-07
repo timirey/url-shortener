@@ -5,6 +5,10 @@
     </strong>
     <table class="table table-sm mt-4">
         <tr>
+            <td>{{ __('Original URL') }}</td>
+            <td>{{ $shortenedUrl->url }}</td>
+        </tr>
+        <tr>
             <td>{{ __('Created') }}</td>
             <td>{{ $shortenedUrl->created_at->diffForHumans() }}</td>
         </tr>

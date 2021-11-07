@@ -34,6 +34,12 @@ class ShortenedUrlController extends Controller
     {
         $url = parse_url($request->validated()['url']);
 
+        if (!isset($url['path'])) {
+            return response()->json([
+                'text' => __('Shortened URL code was not found!')
+            ]);
+        }
+
         $explodePath = explode('/', $url['path']);
         array_shift($explodePath);
 

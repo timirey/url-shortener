@@ -26,7 +26,7 @@ class ValidUrl implements Rule
      */
     public function passes($attribute, $value)
     {
-        return app()->isLocal() || $this->isValidUrl($value);
+        return $this->isValidUrl($value);
     }
 
     /**
@@ -43,6 +43,7 @@ class ValidUrl implements Rule
         $url = parse_url($url);
 
         if (!isset($url["host"])) return false;
+        if ($url['host'] == '127.0.0.1' || $url['host'] == 'localhost') return true;
         return !(gethostbyname($url["host"]) == $url["host"]);
     }
 }
