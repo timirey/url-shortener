@@ -14,7 +14,7 @@
         </tr>
         <tr>
             <td>{{ __('Last redirect') }}</td>
-            <td>{{ $shortenedUrl->redirects->last()->created_at->diffForHumans() }}</td>
+            <td>{{ optional(optional($shortenedUrl->redirects->last())->created_at)->diffForHumans() }}</td>
         </tr>
     </table>
 </div>

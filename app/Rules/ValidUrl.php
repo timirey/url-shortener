@@ -26,7 +26,7 @@ class ValidUrl implements Rule
      */
     public function passes($attribute, $value)
     {
-        return $this->isValidUrl($value);
+        return app()->isLocal() || $this->isValidUrl($value);
     }
 
     /**

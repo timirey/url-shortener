@@ -34,12 +34,6 @@ class ShortenedUrlController extends Controller
     {
         $url = parse_url($request->validated()['url']);
 
-        if ($url['host'] != $request->getHttpHost()) {
-            return response()->json([
-                'text' => __('Shortened URL cannot be external!')
-            ]);
-        }
-
         $explodePath = explode('/', $url['path']);
         array_shift($explodePath);
 
