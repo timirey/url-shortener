@@ -14,7 +14,7 @@
         </tr>
         <tr>
             <td>{{ __('Redirects') }}</td>
-            <td>{{ $shortenedUrl->redirects->count() }} {{ __('times') }}</td>
+            <td>{{ $shortenedUrl->redirects->count() }} {{ __('time(s)') }}</td>
         </tr>
         <tr>
             <td>{{ __('Last redirect') }}</td>
