@@ -7,6 +7,18 @@ use Illuminate\Database\Eloquent\Model;
 class ShortenedUrl extends Model
 {
     /**
+     * The "booted" method of the model.
+     *
+     * @return void
+     */
+    protected static function booted()
+    {
+        static::retrieved(function ($shortenedUrl) {
+            $shortenedUrl->redirects()->create();
+        });
+    }
+
+    /**
      * The table associated with the model.
      *
      * @var string
