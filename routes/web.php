@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\ShortenedUrlController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,3 +18,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::post('generate-shortened-url', [ShortenedUrlController::class, 'generateShortenedUrl'])->name('generate_shortened_url');
+
+Route::get('{code}', [ShortenedUrlController::class, 'retrieveShortenUrl'])->name('retrieve_shorten_url');

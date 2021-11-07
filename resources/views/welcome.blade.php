@@ -8,10 +8,10 @@
                     <hr>
                 </div>
                 <div>
-                    <form id="url-shorten-form" action="" method="post" enctype="multipart/form-data">
+                    <form id="url-shorten-form" action="{{ route('generate_shortened_url') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="input-group">
-                            <input type="text" class="form-control" placeholder="{{ __('Paste your url and shorten it') }}" aria-label="{{ __('Paste your url and shorten it') }}" required>
+                            <input type="text" name="url" class="form-control" placeholder="{{ __('Paste your url and shorten it') }}" aria-label="{{ __('Paste your url and shorten it') }}" required>
                             <div class="input-group-append">
                                 <button class="btn btn-outline-primary" type="submit">{{ __('Shorten') }}</button>
                             </div>
