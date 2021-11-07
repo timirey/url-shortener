@@ -20,5 +20,7 @@ Route::get('/', function () {
 });
 
 Route::post('generate-shortened-url', [ShortenedUrlController::class, 'generateShortenedUrl'])->name('generate_shortened_url');
+Route::post('get-shorten-url-info', [ShortenedUrlController::class, 'getShortenUrlInfo'])->name('get_shorten_url_info');
+
 
 Route::get('{code}', [ShortenedUrlController::class, 'retrieveShortenUrl'])->name('retrieve_shorten_url');

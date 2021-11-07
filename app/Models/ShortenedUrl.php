@@ -39,4 +39,9 @@ class ShortenedUrl extends Model
     {
         return $this->hasMany(ShortenedUrlRedirect::class);
     }
+
+    public function getShortenedUrl()
+    {
+        return url()->to($this->code);
+    }
 }

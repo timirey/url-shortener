@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreShortenedUrl;
+use App\Http\Requests\ShortenedUrlRequest;
 use App\Models\ShortenedUrl;
 use Illuminate\Support\Str;
 
 
 class ShortenedUrlController extends Controller
 {
-    public function generateShortenedUrl(StoreShortenedUrl $request)
+    public function generateShortenedUrl(ShortenedUrlRequest $request)
     {
         $url = $request->validated()['url'];
 
@@ -18,7 +18,47 @@ class ShortenedUrlController extends Controller
             'code' => $this->generateUniqueCode()
         ]);
 
-        return true;
+        return response()->json([
+            'html' => view('ajax.shortener.show_shortened_url', compact('shortenedUrl'))->render()
+        ]);
+    }
+
+    public function retrieveShortenUrl($code)
+    {
+        $shortenedUrl = ShortenedUrl::whereCode($code)->firstOrFail();
+
+        return redirect($shortenedUrl->url);
+    }
+
+    public function getShortenUrlInfo(ShortenedUrlRequest $request)
+    {
+        $url = parse_url($request->validated()['url']);
+
+        if ($url['host'] != $request->getHttpHost()) {
+            return response()->json([
+                'text' => __('Shortened URL cannot be external!')
+            ]);
+        }
+
+        $explodePath = explode('/', $url['path']);
+        array_shift($explodePath);
+
+        $code = $explodePath ? $explodePath[0] : null;
+
+        $shortenedUrl = ShortenedUrl::withoutEvents(function () use ($code) {
+            return ShortenedUrl::whereCode($code)->first();
+        });
+
+        if (!$shortenedUrl) {
+            return response()->json([
+                'text' => __('Shortened URL is not valid!')
+            ]);
+        } else {
+            return response()->json([
+                'html' => view('ajax.shortener.show_shortened_url_info', compact('shortenedUrl'))->render()
+            ]);
+        }
+
     }
 
     private function generateUniqueCode()

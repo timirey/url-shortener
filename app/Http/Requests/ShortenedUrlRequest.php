@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use App\Rules\ValidUrl;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreShortenedUrl extends FormRequest
+class ShortenedUrlRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,7 +25,7 @@ class StoreShortenedUrl extends FormRequest
     public function rules()
     {
         return [
-            'url' => ['required', 'url', new ValidUrl]
+            'url' => ['required', new ValidUrl]
         ];
     }
 }
